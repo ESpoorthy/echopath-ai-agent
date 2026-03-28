@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - echopath-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=development
+      - DEBUG=true
+    env_file:
+      - .env
+    volumes:
+      - ./backend:/app
+      - ./logs:/app/logs
+    networks:
+      - echopath-network
+
+  # PostgreSQL database (for future use)
+  # database:
+  #   image: postgres:15
+  #   environment:
+  #     POSTGRES_DB: echopath_db
+  #     POSTGRES_USER: echopath_user
+  #     POSTGRES_PASSWORD: echopath_password
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   networks:
+  #     - echopath-network
+
+  # Redis for caching (for future use)
+  # redis:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - "6379:6379"
+  #   networks:
+  #     - echopath-network
+
+networks:
+  echopath-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
