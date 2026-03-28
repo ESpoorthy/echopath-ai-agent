@@ -48,8 +48,30 @@ const TherapySession: React.FC = () => {
 
   useEffect(() => {
     if (childId) {
-      const foundChild = mockChildren.find(c => c.id === childId);
-      setChild(foundChild || null);
+      // First check localStorage for all children (including newly added ones)
+      let allChildren = mockChildren;
+      const savedChildren = localStorage.getItem('echopath_children');
+      if (savedChildren) {
+        try {
+          allChildren = JSON.parse(savedChildren);
+        } catch (error) {
+          console.error('Error parsing saved children:', error);
+          allChildren = mockChildren;
+        }
+      }
+      
+      console.log('Looking for child with ID:', childId, 'in children:', allChildren);
+      const foundChild = allChildren.find(c => c.id === childId);
+      
+      if (!foundChild) {
+        console.error('Child not found with ID:', childId);
+        // Redirect back to dashboard if child not found
+        navigate('/dashboard');
+        return;
+      }
+      
+      console.log('Found child:', foundChild);
+      setChild(foundChild);
       
       // Initialize first exercise based on child's level
       const initialDifficulty = foundChild?.difficultyLevel === 'beginner' ? 2 : 
@@ -69,7 +91,7 @@ const TherapySession: React.FC = () => {
         completed: false
       });
     }
-  }, [childId]);
+  }, [childId, navigate]);
 
   const handleRecordingComplete = async (audioBlob: Blob, transcription: string, speechConfidence: number) => {
     setIsProcessing(true);

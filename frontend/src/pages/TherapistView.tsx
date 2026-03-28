@@ -19,8 +19,29 @@ import {
 
 const TherapistView: React.FC = () => {
   const navigate = useNavigate();
-  const [selectedChild, setSelectedChild] = useState<ChildProfile>(mockChildren[0]);
+  
+  // Load children from localStorage or use mock data
+  const [allChildren, setAllChildren] = useState<ChildProfile[]>(() => {
+    const savedChildren = localStorage.getItem('echopath_children');
+    if (savedChildren) {
+      try {
+        return JSON.parse(savedChildren);
+      } catch (error) {
+        console.error('Error parsing saved children:', error);
+      }
+    }
+    return mockChildren;
+  });
+  
+  const [selectedChild, setSelectedChild] = useState<ChildProfile>(allChildren[0]);
   const [activeTab, setActiveTab] = useState<'overview' | 'sessions' | 'compliance'>('overview');
+
+  // Update selected child when allChildren changes
+  React.useEffect(() => {
+    if (allChildren.length > 0 && !allChildren.find(c => c.id === selectedChild?.id)) {
+      setSelectedChild(allChildren[0]);
+    }
+  }, [allChildren, selectedChild]);
 
   const sessionLogs = [
     {
@@ -127,12 +148,12 @@ const TherapistView: React.FC = () => {
             <select
               value={selectedChild.id}
               onChange={(e) => {
-                const child = mockChildren.find(c => c.id === e.target.value);
+                const child = allChildren.find(c => c.id === e.target.value);
                 if (child) setSelectedChild(child);
               }}
               className="px-4 py-2 border border-cream-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-beige-400"
             >
-              {mockChildren.map(child => (
+              {allChildren.map(child => (
                 <option key={child.id} value={child.id}>
                   {child.name}
                 </option>
