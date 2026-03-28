@@ -118,7 +118,7 @@ We welcome contributions from developers, clinicians, and accessibility experts:
 
 ## 🌟 **Support & Community**
 
-- 📧 **Email**: support@echopath.ai
+- 📧 **Email**: saispoorthyeturu6@gmail.com
 - 🐛 **Issues**: [GitHub Issues](https://github.com/ESpoorthy/echopath-ai-agent/issues)
 - 💬 **Discussions**: [GitHub Discussions](https://github.com/ESpoorthy/echopath-ai-agent/discussions)
 - 📖 **Documentation**: Available in `/docs` folder
