@@ -130,6 +130,25 @@ const Layout: React.FC<LayoutProps> = ({ children, showNavigation = true }) => {
         {children}
       </main>
 
+      {/* Footer */}
+      <footer className="relative z-10 bg-white/60 backdrop-blur-md border-t border-pink-200/30 py-6">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-2"
+          >
+            <p className="text-gray-700 font-medium">
+              Built with ❤️ for children, families, and speech-language pathologists worldwide.
+            </p>
+            <p className="text-gray-600 text-sm">
+              EchoPath AI - Where technology meets compassionate care.
+            </p>
+          </motion.div>
+        </div>
+      </footer>
+
       {/* Notification Center */}
       <NotificationCenter
         show={showNotifications}

@@ -33,14 +33,14 @@ const LandingPage: React.FC = () => {
     <Layout showNavigation={false}>
       <div className="min-h-screen flex flex-col">
         {/* Hero Section */}
-        <section className="flex-1 flex items-center justify-center px-4 py-20">
+        <section className="flex-1 flex items-center justify-center px-4 py-12">
           <div className="max-w-6xl mx-auto text-center">
             <div className="hero-card">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="mb-8"
+                className="mb-6"
               >
                 <div className="flex items-center justify-center space-x-4 mb-6">
                   <motion.div 
@@ -55,7 +55,7 @@ const LandingPage: React.FC = () => {
                   </h1>
                 </div>
                 
-                <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+                <p className="text-xl md:text-2xl text-gray-600 mb-6 max-w-3xl mx-auto leading-relaxed">
                   Empowering autistic children through AI-powered speech therapy that adapts, 
                   encourages, and celebrates every step of their communication journey.
                 </p>
@@ -65,7 +65,7 @@ const LandingPage: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+                className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
               >
                 <motion.button
                   className="btn-primary text-lg px-8 py-4 shadow-lg"
@@ -85,7 +85,7 @@ const LandingPage: React.FC = () => {
                 </motion.button>
               </motion.div>
 
-              {/* Decorative Elements */}
+              {/* Autism-Friendly Decorative Elements */}
               <motion.div 
                 className="flex justify-center space-x-8"
                 initial={{ opacity: 0 }}
@@ -96,29 +96,33 @@ const LandingPage: React.FC = () => {
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                   className="text-4xl"
+                  title="Infinity symbol representing neurodiversity"
                 >
-                  🌈
+                  ∞
                 </motion.div>
                 <motion.div
                   animate={{ y: [0, -15, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
                   className="text-4xl"
+                  title="Puzzle piece representing autism awareness"
                 >
-                  ☁️
+                  🧩
                 </motion.div>
                 <motion.div
                   animate={{ y: [0, -8, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                   className="text-4xl"
+                  title="Heart representing love and acceptance"
                 >
-                  🐘
+                  💙
                 </motion.div>
                 <motion.div
                   animate={{ y: [0, -12, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
                   className="text-4xl"
+                  title="Lightbulb representing unique thinking"
                 >
-                  ⭐
+                  💡
                 </motion.div>
               </motion.div>
             </div>
@@ -126,14 +130,14 @@ const LandingPage: React.FC = () => {
         </section>
 
         {/* Features Section */}
-        <section className="py-20 bg-white/30">
+        <section className="py-16 bg-white/30">
           <div className="max-w-7xl mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="text-center mb-16"
+              className="text-center mb-12"
             >
               <div className="hero-card max-w-4xl mx-auto">
                 <h2 className="font-display font-bold text-3xl md:text-4xl text-gray-800 mb-4">
