@@ -1,4 +1,4 @@
-import { ChildProfile, TherapySession, ProgressData, RewardBadge, AIAgent } from '../types';
+import { ChildProfile, ProgressData, RewardBadge, AIAgent } from '../types';
 
 export const mockChildren: ChildProfile[] = [
   {
@@ -36,26 +36,6 @@ export const mockChildren: ChildProfile[] = [
     }
   }
 ];
-
-export const mockSession: TherapySession = {
-  id: 'session-1',
-  childId: '1',
-  startTime: '2024-03-28T10:00:00Z',
-  exercises: [
-    {
-      id: 'ex-1',
-      type: 'phoneme',
-      prompt: 'Say "red" clearly',
-      targetSound: 'r',
-      difficulty: 3,
-      attempts: [],
-      completed: false
-    }
-  ],
-  overallScore: 0,
-  feedback: '',
-  nextRecommendations: []
-};
 
 export const mockProgressData: ProgressData[] = [
   { date: '2024-03-21', accuracy: 65, sessionsCompleted: 1, streakDays: 1, phonemeScores: { 'r': 60, 's': 70 } },

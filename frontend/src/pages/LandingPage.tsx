@@ -165,34 +165,6 @@ const LandingPage: React.FC = () => {
             </div>
           </div>
         </section>
-
-        {/* CTA Section */}
-        <section className="py-20">
-          <div className="max-w-4xl mx-auto text-center px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="font-display font-bold text-3xl md:text-4xl text-gray-800 mb-6">
-                Ready to Begin?
-              </h2>
-              <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-                Join thousands of families who have discovered the joy of personalized, 
-                AI-powered speech therapy. Start your child's journey today.
-              </p>
-              <motion.button
-                className="btn-primary text-lg px-10 py-4 shadow-lg"
-                onClick={() => navigate('/dashboard')}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Get Started Free
-              </motion.button>
-            </motion.div>
-          </div>
-        </section>
       </div>
     </Layout>
   );

@@ -30,35 +30,9 @@ services:
       - .env
     volumes:
       - ./backend:/app
-      - ./logs:/app/logs
     networks:
       - echopath-network
-
-  # PostgreSQL database (for future use)
-  # database:
-  #   image: postgres:15
-  #   environment:
-  #     POSTGRES_DB: echopath_db
-  #     POSTGRES_USER: echopath_user
-  #     POSTGRES_PASSWORD: echopath_password
-  #   volumes:
-  #     - postgres_data:/var/lib/postgresql/data
-  #   ports:
-  #     - "5432:5432"
-  #   networks:
-  #     - echopath-network
-
-  # Redis for caching (for future use)
-  # redis:
-  #   image: redis:7-alpine
-  #   ports:
-  #     - "6379:6379"
-  #   networks:
-  #     - echopath-network
 
 networks:
   echopath-network:
     driver: bridge
-
-volumes:
-  postgres_data:

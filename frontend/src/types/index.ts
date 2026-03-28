@@ -72,14 +72,3 @@ export interface RewardBadge {
   earnedDate?: string;
   category: 'accuracy' | 'consistency' | 'improvement' | 'milestone';
 }
-
-export interface TherapistNote {
-  id: string;
-  childId: string;
-  sessionId: string;
-  content: string;
-  priority: 'low' | 'medium' | 'high';
-  createdAt: string;
-  createdBy: string;
-  resolved: boolean;
-}
