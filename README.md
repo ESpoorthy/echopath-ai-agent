@@ -1,126 +1,194 @@
-# EchoPath AI - Adaptive Speech Therapy Platform
+# EchoPath AI - Speech Therapy Platform
 
-🌟 **Winner of Best AI Innovation Award** - Transforming speech therapy through personalized, AI-driven interventions for autistic children.
+A prototype AI-powered speech therapy platform designed for autistic children, featuring multi-agent AI systems and real-time speech analysis.
 
-## 🎯 Mission Statement
+## 🎯 Overview
 
-EchoPath leverages cutting-edge artificial intelligence and multi-agent systems to deliver personalized, adaptive speech therapy sessions that grow with each child's unique learning journey. Our platform creates a calm, supportive environment where children can practice speech skills while parents and therapists track meaningful progress.
+EchoPath is a web-based speech therapy platform that uses artificial intelligence to provide personalized speech exercises and real-time pronunciation feedback. The platform features a child-friendly interface with autism-friendly design principles and comprehensive progress tracking.
 
-## 🚀 Key Features
+## 🚀 Features
 
 ### 🧠 Multi-Agent AI System
 - **Therapy Planner Agent**: Generates personalized session plans
-- **Speech Analysis Agent**: Real-time phoneme accuracy evaluation
-- **Adaptive Learning Agent**: Dynamic difficulty adjustment
-- **Progress Tracking Agent**: Comprehensive analytics dashboard
-- **Compliance Agent**: Safety and clinical audit compliance
+- **Speech Analysis Agent**: Real-time pronunciation accuracy evaluation
+- **Adaptive Learning Agent**: Dynamic difficulty adjustment based on performance
+- **Progress Tracking Agent**: Comprehensive analytics and progress monitoring
+- **Compliance Agent**: Session logging and data handling
 
 ### 👶 Child-Centered Design
-- Calm, warm visual palette (soft beige, cream, light orange)
-- Gentle animations and child-friendly illustrations
-- Large, accessible typography and intuitive controls
-- Reward systems with milestone badges and progress visualization
+- Autism-friendly color palette (soft beige, cream, light orange)
+- Gentle animations and intuitive controls
+- Large, accessible typography
+- Reward systems with progress visualization and badges
 
-### 📊 Clinical Excellence
-- Real-time speech pattern analysis
-- Phoneme accuracy trending
-- Session streak tracking
-- Therapist oversight and approval workflows
-- Comprehensive progress reporting
+### 📊 Speech Analysis Features
+- Real-time speech-to-text using browser Speech Recognition API
+- Pronunciation accuracy scoring using Levenshtein distance algorithm
+- Phoneme-specific feedback and tips
+- Text-to-speech instructions for accessibility
+- Session progress tracking and analytics
 
-### 🔒 Safety & Compliance
-- HIPAA-compliant data handling
-- Parental consent management
-- Clinical audit trails
-- Privacy-first architecture
+### 🔒 Privacy & Safety
+- Local browser-based speech processing
+- No audio data stored on servers
+- Environment-based configuration for security
+- Child-safe interface design
 
-## 🏗️ Technical Architecture
+## 🏗️ Technical Stack
 
-### Frontend Stack
+### Frontend
 - **React 18** with TypeScript
 - **Tailwind CSS** for responsive design
-- **Framer Motion** for smooth animations
+- **Framer Motion** for animations
 - **Recharts** for data visualization
-- **Web Audio API** for speech processing
+- **Web Speech API** for speech processing
+- **React Router** for navigation
 
-### Backend Stack
+### Backend
 - **FastAPI** with Python 3.9+
-- **Multi-Agent Architecture** using OpenAI GPT-4
-- **Real-time WebSocket** connections
-- **PostgreSQL** for data persistence
-- **Docker** containerization
+- **Multi-Agent Architecture** with mock AI responses
+- **Environment-based configuration**
+- **RESTful API** design
+- **CORS** enabled for local development
 
-### AI/ML Pipeline
-- **Speech-to-Text**: OpenAI Whisper integration
-- **Natural Language Processing**: Custom phoneme analysis
-- **Adaptive Learning**: Reinforcement learning algorithms
-- **Progress Analytics**: Statistical modeling for therapy outcomes
+### Development Tools
+- **Docker** support with docker-compose
+- **Hot reload** for development
+- **TypeScript** for type safety
+- **ESLint** and **Prettier** for code quality
 
-## � Design Philosophy
+## 🛠️ Setup Instructions
 
-EchoPath's interface embodies **calm professionalism** - sophisticated enough for clinical use, gentle enough for children. Our design system features:
+### Prerequisites
+- **Node.js** 16+ and npm
+- **Python** 3.9+
+- **Git**
 
-- Soft, muted color palette promoting focus and calm
-- Rounded corners and gentle shadows for approachability
-- Consistent spacing and typography for accessibility
-- Subtle animations that guide without overwhelming
+### Quick Start
 
-## 📈 Impact Metrics
-
-- **85% improvement** in speech clarity scores
-- **92% parent satisfaction** rating
-- **78% reduction** in therapy session preparation time
-- **95% child engagement** retention rate
-
-## 🛠️ Quick Start
-
+1. **Clone the repository**
 ```bash
-# Clone repository
 git clone https://github.com/ESpoorthy/echopath-ai-agent.git
 cd echopath-ai-agent
-
-# Setup environment
-cp .env.example .env
-# Add your OpenAI API key to .env
-
-# Start with Docker
-docker-compose up -d
-
-# Or run locally
-pip install -r requirements.txt
-cd frontend && npm install && npm start
-cd ../backend && uvicorn main:app --reload
 ```
 
-## 🌐 **Access Points**
+2. **Setup environment variables**
+```bash
+cp .env.example .env
+# The default .env values work for local development
+```
+
+3. **Install backend dependencies**
+```bash
+pip install -r requirements.txt
+```
+
+4. **Install frontend dependencies**
+```bash
+cd frontend
+npm install
+cd ..
+```
+
+5. **Start the backend server**
+```bash
+cd backend
+python3 main.py
+# Backend will run on http://localhost:8000
+```
+
+6. **Start the frontend (in a new terminal)**
+```bash
+cd frontend
+npm start
+# Frontend will run on http://localhost:3000
+```
+
+### Alternative: Docker Setup
+
+```bash
+# Build and start both services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+```
+
+## 🌐 Access Points
 
 - **Frontend Application**: http://localhost:3000
 - **Backend API**: http://localhost:8000  
 - **API Documentation**: http://localhost:8000/docs
 - **Health Check**: http://localhost:8000/api/health
 
-## 🏆 Awards & Recognition
+## 🎮 Demo Flow
 
-- **Best AI Innovation** - TechCrunch Disrupt 2024
-- **Healthcare Technology Excellence** - Digital Health Awards
-- **Accessibility Champion** - Inclusive Design Awards
-- **Clinical Impact Recognition** - American Speech-Language-Hearing Association
+1. **Landing Page**: Visit http://localhost:3000
+2. **Create Profile**: Click "Start Your Journey" to add a child profile
+3. **Dashboard**: View child profiles and progress analytics
+4. **Speech Session**: Click "Try Voice Demo" or "Start Session" on any child card
+5. **Voice Practice**: Follow on-screen instructions to practice pronunciation
+6. **Real-time Feedback**: Receive AI-powered pronunciation analysis
+7. **Progress Tracking**: View session results and improvement metrics
+
+## 📁 Project Structure
+
+```
+echopath-ai-agent/
+├── frontend/                 # React TypeScript frontend
+│   ├── src/
+│   │   ├── components/      # Reusable UI components
+│   │   ├── pages/          # Main application pages
+│   │   ├── services/       # API and speech services
+│   │   ├── types/          # TypeScript type definitions
+│   │   └── utils/          # Utility functions and mock data
+│   ├── public/             # Static assets
+│   └── package.json        # Frontend dependencies
+├── backend/                 # FastAPI Python backend
+│   ├── agents/             # AI agent implementations
+│   ├── models/             # Data models
+│   ├── routes/             # API route handlers
+│   ├── utils/              # Backend utilities
+│   └── main.py             # FastAPI application entry point
+├── docs/                   # Documentation files
+├── .env.example            # Environment variables template
+├── requirements.txt        # Python dependencies
+└── docker-compose.yml      # Docker configuration
+```
+
+## 🧪 Testing
+
+### Backend API Testing
+```bash
+# Test health endpoint
+curl http://localhost:8000/api/health
+
+# Test speech analysis
+curl -X POST http://localhost:8000/api/analyze-pronunciation \
+  -F "transcription=red" \
+  -F "target_word=red" \
+  -F "target_sound=r" \
+  -F "child_id=1"
+```
+
+### Frontend Testing
+```bash
+cd frontend
+npm test
+```
 
 ## 🤝 Contributing
 
-We welcome contributions from developers, clinicians, and accessibility experts:
-
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
+2. Create a feature branch (`git checkout -b feature/new-feature`)
+3. Commit your changes (`git commit -m 'Add new feature'`)
+4. Push to the branch (`git push origin feature/new-feature`)
 5. Open a Pull Request
 
-## 🌟 **Support & Community**
+## 📞 Support
 
 - 📧 **Email**: saispoorthyeturu6@gmail.com
 - 🐛 **Issues**: [GitHub Issues](https://github.com/ESpoorthy/echopath-ai-agent/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/ESpoorthy/echopath-ai-agent/discussions)
 - 📖 **Documentation**: Available in `/docs` folder
 
 ## 📄 License
