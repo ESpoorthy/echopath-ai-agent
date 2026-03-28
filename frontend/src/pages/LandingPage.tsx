@@ -33,7 +33,7 @@ const LandingPage: React.FC = () => {
     <Layout showNavigation={false}>
       <div className="min-h-screen flex flex-col">
         {/* Hero Section */}
-        <section className="flex-1 flex items-center justify-center px-4 py-12">
+        <section className="flex items-center justify-center px-4 py-8">
           <div className="max-w-6xl mx-auto text-center">
             <div className="hero-card">
               <motion.div
@@ -130,14 +130,14 @@ const LandingPage: React.FC = () => {
         </section>
 
         {/* Features Section */}
-        <section className="py-16 bg-white/30">
+        <section className="py-8 bg-white/30">
           <div className="max-w-7xl mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
+              className="text-center mb-8"
             >
               <div className="hero-card max-w-4xl mx-auto">
                 <h2 className="font-display font-bold text-3xl md:text-4xl text-gray-800 mb-4">
