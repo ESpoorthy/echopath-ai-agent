@@ -11,7 +11,8 @@ import VoiceInstructions from '../components/VoiceInstructions.tsx';
 import { mockChildren, mockAIAgents } from '../utils/mockData.ts';
 import { Exercise, Attempt, ChildProfile } from '../types/index.ts';
 import SpeechService from '../services/speechService.ts';
-import { ArrowLeft, Info, HelpCircle } from 'lucide-react';
+import TextToSpeechService from '../services/textToSpeechService.ts';
+import { ArrowLeft, Info, HelpCircle, Volume2, VolumeX } from 'lucide-react';
 
 const TherapySession: React.FC = () => {
   const { childId } = useParams<{ childId: string }>();
@@ -35,6 +36,8 @@ const TherapySession: React.FC = () => {
     progressAgent: 'Preparing to track learning progress...'
   });
   const [showInstructions, setShowInstructions] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [autoSpeechEnabled, setAutoSpeechEnabled] = useState(true);
 
   const exercises = [
     { prompt: 'Say "red" clearly and slowly', targetSound: 'r', difficulty: 3 },
@@ -90,8 +93,49 @@ const TherapySession: React.FC = () => {
         attempts: [],
         completed: false
       });
+
+      // Speak the initial exercise instruction after a short delay
+      setTimeout(() => {
+        if (autoSpeechEnabled) {
+          speakExerciseInstruction(randomExercise.prompt, randomExercise.targetSound);
+        }
+      }, 1000);
     }
-  }, [childId, navigate]);
+  }, [childId, navigate, autoSpeechEnabled]);
+
+  const speakExerciseInstruction = async (prompt: string, targetSound: string) => {
+    if (!TextToSpeechService.isSupported() || !autoSpeechEnabled) return;
+    
+    try {
+      setIsSpeaking(true);
+      await TextToSpeechService.speakExerciseInstruction(prompt, targetSound);
+    } catch (error) {
+      console.error('Text-to-speech error:', error);
+    } finally {
+      setIsSpeaking(false);
+    }
+  };
+
+  const speakFeedback = async (feedback: string, isPositive: boolean = true) => {
+    if (!TextToSpeechService.isSupported() || !autoSpeechEnabled) return;
+    
+    try {
+      setIsSpeaking(true);
+      await TextToSpeechService.speakFeedback(feedback, isPositive);
+    } catch (error) {
+      console.error('Text-to-speech error:', error);
+    } finally {
+      setIsSpeaking(false);
+    }
+  };
+
+  const toggleAutoSpeech = () => {
+    setAutoSpeechEnabled(!autoSpeechEnabled);
+    if (TextToSpeechService.isSpeaking()) {
+      TextToSpeechService.stop();
+      setIsSpeaking(false);
+    }
+  };
 
   const handleRecordingComplete = async (audioBlob: Blob, transcription: string, speechConfidence: number) => {
     setIsProcessing(true);
@@ -143,6 +187,13 @@ const TherapySession: React.FC = () => {
 
       // Store AI decisions for display
       setAiDecisions(analysisResult.ai_decisions);
+      
+      // Speak feedback if enabled
+      if (autoSpeechEnabled) {
+        setTimeout(() => {
+          speakFeedback(analysisResult.feedback, analysisResult.accuracy > 70);
+        }, 500);
+      }
       
     } catch (error) {
       console.error('Speech analysis failed:', error);
@@ -272,6 +323,13 @@ const TherapySession: React.FC = () => {
     
     setAttempts([]);
     setShowFeedback(false);
+
+    // Speak the new exercise instruction
+    if (autoSpeechEnabled) {
+      setTimeout(() => {
+        speakExerciseInstruction(randomExercise.prompt, randomExercise.targetSound);
+      }, 800);
+    }
   };
 
   const getAIDecisions = () => {
@@ -342,6 +400,23 @@ const TherapySession: React.FC = () => {
             >
               <HelpCircle size={20} />
             </motion.button>
+            <motion.button
+              className={`btn-secondary p-2 ${isSpeaking ? 'bg-green-100' : ''}`}
+              onClick={toggleAutoSpeech}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              title={autoSpeechEnabled ? "Disable AI voice instructions" : "Enable AI voice instructions"}
+            >
+              {autoSpeechEnabled ? (
+                isSpeaking ? (
+                  <Volume2 size={20} className="text-green-600" />
+                ) : (
+                  <Volume2 size={20} />
+                )
+              ) : (
+                <VolumeX size={20} className="text-gray-400" />
+              )}
+            </motion.button>
             <div>
               <h1 className="font-display font-bold text-2xl text-gray-800">
                 {child.name}'s Session
@@ -389,9 +464,25 @@ const TherapySession: React.FC = () => {
                 <h2 className="font-display font-semibold text-2xl text-gray-800 mb-4">
                   {currentExercise.prompt}
                 </h2>
-                <p className="text-gray-600">
-                  Take your time and speak clearly. You've got this! 💪
-                </p>
+                <div className="flex items-center justify-center space-x-4 mb-4">
+                  <p className="text-gray-600">
+                    Take your time and speak clearly. You've got this! 💪
+                  </p>
+                  <motion.button
+                    onClick={() => speakExerciseInstruction(currentExercise.prompt, currentExercise.targetSound)}
+                    disabled={isSpeaking || !TextToSpeechService.isSupported()}
+                    className={`p-2 rounded-full transition-colors ${
+                      isSpeaking 
+                        ? 'bg-green-100 text-green-600' 
+                        : 'bg-blue-100 hover:bg-blue-200 text-blue-600'
+                    } ${!TextToSpeechService.isSupported() ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    whileHover={TextToSpeechService.isSupported() && !isSpeaking ? { scale: 1.1 } : {}}
+                    whileTap={TextToSpeechService.isSupported() && !isSpeaking ? { scale: 0.9 } : {}}
+                    title="Listen to instructions"
+                  >
+                    <Volume2 size={20} />
+                  </motion.button>
+                </div>
               </div>
 
               {/* Decorative illustration area */}
