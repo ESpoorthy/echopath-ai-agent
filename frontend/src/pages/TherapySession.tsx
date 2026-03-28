@@ -38,6 +38,7 @@ const TherapySession: React.FC = () => {
   const [showInstructions, setShowInstructions] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [autoSpeechEnabled, setAutoSpeechEnabled] = useState(true);
+  const [hasSpokenCurrentExercise, setHasSpokenCurrentExercise] = useState(false);
 
   const exercises = [
     { prompt: 'Say "red" clearly and slowly', targetSound: 'r', difficulty: 3 },
@@ -94,17 +95,21 @@ const TherapySession: React.FC = () => {
         completed: false
       });
 
-      // Speak the initial exercise instruction after a short delay
+      // Reset spoken state for new exercise
+      setHasSpokenCurrentExercise(false);
+
+      // Speak the initial exercise instruction after a short delay (only once)
       setTimeout(() => {
         if (autoSpeechEnabled) {
           speakExerciseInstruction(randomExercise.prompt, randomExercise.targetSound);
+          setHasSpokenCurrentExercise(true);
         }
       }, 1000);
     }
-  }, [childId, navigate, autoSpeechEnabled]);
+  }, [childId, navigate]);
 
   const speakExerciseInstruction = async (prompt: string, targetSound: string) => {
-    if (!TextToSpeechService.isSupported() || !autoSpeechEnabled) return;
+    if (!TextToSpeechService.isSupported()) return;
     
     try {
       setIsSpeaking(true);
@@ -113,6 +118,12 @@ const TherapySession: React.FC = () => {
       console.error('Text-to-speech error:', error);
     } finally {
       setIsSpeaking(false);
+    }
+  };
+
+  const handleManualSpeech = async () => {
+    if (currentExercise && !isSpeaking) {
+      await speakExerciseInstruction(currentExercise.prompt, currentExercise.targetSound);
     }
   };
 
@@ -323,11 +334,13 @@ const TherapySession: React.FC = () => {
     
     setAttempts([]);
     setShowFeedback(false);
+    setHasSpokenCurrentExercise(false);
 
-    // Speak the new exercise instruction
+    // Speak the new exercise instruction automatically (only once)
     if (autoSpeechEnabled) {
       setTimeout(() => {
         speakExerciseInstruction(randomExercise.prompt, randomExercise.targetSound);
+        setHasSpokenCurrentExercise(true);
       }, 800);
     }
   };
@@ -469,7 +482,7 @@ const TherapySession: React.FC = () => {
                     Take your time and speak clearly. You've got this! 💪
                   </p>
                   <motion.button
-                    onClick={() => speakExerciseInstruction(currentExercise.prompt, currentExercise.targetSound)}
+                    onClick={handleManualSpeech}
                     disabled={isSpeaking || !TextToSpeechService.isSupported()}
                     className={`p-2 rounded-full transition-colors ${
                       isSpeaking 
@@ -508,15 +521,6 @@ const TherapySession: React.FC = () => {
                 isProcessing={isProcessing}
                 targetWord={currentExercise.prompt.match(/"([^"]+)"/)?.[1] || currentExercise.targetSound}
               />
-            </motion.div>
-
-            {/* AI Agents Panel - Moved here for better flow */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <AIAgentPanel agents={mockAIAgents} />
             </motion.div>
 
             {/* Feedback Panel */}
@@ -607,6 +611,15 @@ const TherapySession: React.FC = () => {
                   Complete Session 🎉
                 </motion.button>
               )}
+            </motion.div>
+
+            {/* AI Agents Panel */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <AIAgentPanel agents={mockAIAgents} />
             </motion.div>
           </div>
         </div>
