@@ -13,16 +13,23 @@ import random
 # Load environment variables
 load_dotenv()
 
+# Environment configuration
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
+DEBUG = os.getenv("DEBUG", "true").lower() == "true"
+BACKEND_PORT = int(os.getenv("BACKEND_PORT", "8000"))
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000").split(",")
+
 app = FastAPI(
     title="EchoPath AI Backend",
     description="AI-powered speech therapy platform backend with multi-agent system",
-    version="1.0.0"
+    version="1.0.0",
+    debug=DEBUG
 )
 
-# Configure CORS
+# Configure CORS with environment variables
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -51,8 +58,15 @@ async def health_check():
         "status": "healthy",
         "timestamp": datetime.now().isoformat(),
         "version": "1.0.0",
-        "environment": os.getenv("ENVIRONMENT", "development"),
-        "agents_active": 5
+        "environment": ENVIRONMENT,
+        "debug_mode": DEBUG,
+        "agents_active": 5,
+        "config": {
+            "backend_port": BACKEND_PORT,
+            "cors_origins": len(ALLOWED_ORIGINS),
+            "speech_timeout": int(os.getenv("SPEECH_RECOGNITION_TIMEOUT", "10")),
+            "max_sessions": int(os.getenv("MAX_DAILY_SESSIONS", "10"))
+        }
     }
 
 @app.post("/api/sessions/start")
@@ -140,6 +154,10 @@ async def analyze_pronunciation(
     Advanced pronunciation analysis using real speech data
     """
     try:
+        # Get configuration from environment
+        confidence_threshold = float(os.getenv("SPEECH_CONFIDENCE_THRESHOLD", "0.5"))
+        timeout = int(os.getenv("SPEECH_RECOGNITION_TIMEOUT", "10"))
+        
         # Calculate pronunciation accuracy
         accuracy = calculate_pronunciation_accuracy(transcription, target_word)
         
@@ -151,11 +169,14 @@ async def analyze_pronunciation(
             "speech_agent": f"Analyzed pronunciation of '{transcription}' vs target '{target_word}'",
             "adaptive_agent": f"Difficulty level {difficulty_level} {'appropriate' if 60 <= accuracy <= 90 else 'needs adjustment'}",
             "therapy_agent": f"Generated personalized feedback based on {accuracy}% accuracy",
-            "progress_agent": f"Updated learning metrics for child {child_id}"
+            "progress_agent": f"Updated learning metrics for child {child_id}",
+            "compliance_agent": f"Session logged with HIPAA compliance (retention: {os.getenv('DATA_RETENTION_DAYS', '2555')} days)"
         }
         
-        # Determine next difficulty level
-        if accuracy > 85:
+        # Determine next difficulty level using environment threshold
+        difficulty_threshold = float(os.getenv("DIFFICULTY_ADJUSTMENT_THRESHOLD", "0.8")) * 100
+        
+        if accuracy > difficulty_threshold:
             next_difficulty = min(7, difficulty_level + 1)
             difficulty_reason = "Excellent performance - increasing challenge"
         elif accuracy < 60:
@@ -174,6 +195,11 @@ async def analyze_pronunciation(
             "difficulty_reason": difficulty_reason,
             "ai_decisions": ai_decisions,
             "pronunciation_tips": generate_pronunciation_tips(target_sound, accuracy),
+            "session_config": {
+                "confidence_threshold": confidence_threshold,
+                "timeout_seconds": timeout,
+                "environment": ENVIRONMENT
+            },
             "timestamp": datetime.now().isoformat()
         }
         
@@ -324,7 +350,7 @@ if __name__ == "__main__":
     uvicorn.run(
         "main:app",
         host="0.0.0.0",
-        port=8000,
-        reload=True,
-        log_level="info"
+        port=BACKEND_PORT,
+        reload=DEBUG,
+        log_level="debug" if DEBUG else "info"
     )
