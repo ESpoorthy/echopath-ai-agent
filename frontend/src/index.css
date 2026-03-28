@@ -18,10 +18,10 @@
 
 @layer components {
   .card {
-    background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
+    background-color: rgba(255, 255, 255, 0.95); /* More opaque */
     border-radius: 1.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
-    border: 1px solid rgba(232, 244, 232, 0.6);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 2px solid rgba(232, 180, 184, 0.3); /* Stronger border */
     padding: 1.5rem;
     backdrop-filter: blur(10px);
   }
@@ -106,41 +106,63 @@
   
   /* Enhanced card styling for better visibility over pattern */
   .card-enhanced {
-    background: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.96); /* Increased opacity */
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(232, 180, 184, 0.3);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(232, 180, 184, 0.4); /* Stronger border */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12); /* Stronger shadow */
+    border-radius: 1.5rem;
+    padding: 1.5rem;
   }
 
   /* Extra soft cards for landing page */
   .card-soft {
-    background: rgba(255, 255, 255, 0.88);
+    background: rgba(255, 255, 255, 0.95); /* Increased opacity */
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 246, 240, 0.95)); /* Fallback gradient */
     border-radius: 2rem; /* Extra rounded corners */
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04);
-    border: 1px solid rgba(232, 180, 184, 0.2);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08); /* Stronger shadows */
+    border: 2px solid rgba(232, 180, 184, 0.4); /* More visible border */
     padding: 2.5rem 2rem; /* More generous padding */
     backdrop-filter: blur(15px);
     transition: all 0.4s ease;
+    min-height: 200px; /* Ensure minimum height */
   }
 
   .card-soft:hover {
-    background: rgba(255, 255, 255, 0.93);
-    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.12), 0 6px 20px rgba(0, 0, 0, 0.06);
+    background: rgba(255, 255, 255, 0.98);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 246, 240, 0.98));
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.15), 0 6px 20px rgba(0, 0, 0, 0.1);
     transform: translateY(-8px);
-    border-color: rgba(232, 180, 184, 0.4);
+    border-color: rgba(232, 180, 184, 0.6);
   }
 
   /* Hero section card */
   .hero-card {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.92); /* Increased opacity */
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(248, 246, 240, 0.92)); /* Fallback gradient */
     border-radius: 3rem; /* Very rounded */
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1), 0 8px 24px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(232, 180, 184, 0.25);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 8px 24px rgba(0, 0, 0, 0.08); /* Stronger shadows */
+    border: 2px solid rgba(232, 180, 184, 0.4); /* More visible border */
     padding: 4rem 3rem; /* Extra generous padding */
     backdrop-filter: blur(20px);
     margin: 2rem 0;
+    min-height: 300px; /* Ensure minimum height */
   }
   
+  /* Fallback for browsers that don't support backdrop-filter */
+  @supports not (backdrop-filter: blur(10px)) {
+    .card-soft, .hero-card, .card-enhanced, .card {
+      background: rgba(255, 255, 255, 0.98) !important;
+      background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 246, 240, 0.98)) !important;
+    }
+  }
+
+  /* Debug class to ensure cards are visible */
+  .debug-visible {
+    background: #ffffff !important;
+    border: 3px solid #ff0000 !important;
+    min-height: 100px !important;
+  }
+
   /* Reduced motion for accessibility */
   @media (prefers-reduced-motion: reduce) {
     * {

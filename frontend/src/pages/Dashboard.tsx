@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout.tsx';
@@ -32,9 +32,11 @@ const Dashboard: React.FC = () => {
   const [showStreakAnalytics, setShowStreakAnalytics] = useState(false);
   const [showBadgesShowcase, setShowBadgesShowcase] = useState(false);
   const [showAddChildForm, setShowAddChildForm] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   // Save children to localStorage whenever children state changes
   React.useEffect(() => {
+    console.log('Saving children to localStorage:', children);
     localStorage.setItem('echopath_children', JSON.stringify(children));
   }, [children]);
 
@@ -52,6 +54,8 @@ const Dashboard: React.FC = () => {
   };
 
   const handleChildAdded = (newChildData: any) => {
+    console.log('Adding new child with data:', newChildData);
+    
     // Generate a new child profile
     const newChild: ChildProfile = {
       id: `child-${Date.now()}`, // Simple ID generation
@@ -71,8 +75,14 @@ const Dashboard: React.FC = () => {
       }
     };
 
+    console.log('Generated new child profile:', newChild);
+
     // Add to children list
-    setChildren(prev => [...prev, newChild]);
+    setChildren(prev => {
+      const updatedChildren = [...prev, newChild];
+      console.log('Updated children list:', updatedChildren);
+      return updatedChildren;
+    });
     
     // Close the form
     setShowAddChildForm(false);
@@ -80,8 +90,19 @@ const Dashboard: React.FC = () => {
     // Select the new child
     setSelectedChild(newChild);
     
-    // Show success notification (you could add a toast notification here)
+    // Show success notification
+    setSuccessMessage(`✅ ${newChild.name}'s profile has been created successfully!`);
     console.log(`New child profile created for ${newChild.name}!`);
+    
+    // Clear success message after 3 seconds
+    setTimeout(() => {
+      setSuccessMessage(null);
+    }, 3000);
+    
+    // Force a re-render by updating a dummy state if needed
+    setTimeout(() => {
+      console.log('Current children state after timeout:', children);
+    }, 100);
   };
 
   // Helper functions
@@ -200,6 +221,18 @@ const Dashboard: React.FC = () => {
   return (
     <Layout>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Success Message */}
+        {successMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed top-4 right-4 z-50 bg-green-100 border border-green-300 text-green-800 px-6 py-3 rounded-xl shadow-lg"
+          >
+            {successMessage}
+          </motion.div>
+        )}
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -304,10 +337,10 @@ const Dashboard: React.FC = () => {
             </motion.button>
           </div>
 
-          <div className="grid gap-6">
+          <div className="grid gap-6" key={`children-${children.length}`}>
             {children.map((child, index) => (
               <motion.div
-                key={child.id}
+                key={`${child.id}-${child.name}`}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}

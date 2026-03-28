@@ -37,8 +37,11 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ onClose, isModal = false, onC
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
+    console.log('ProfileForm handleSubmit called with:', { isModal, onChildAdded: !!onChildAdded, formData });
+    
     if (isModal && onChildAdded) {
       // Call the callback to add the child to the parent component
+      console.log('Calling onChildAdded callback with:', formData);
       onChildAdded(formData);
     } else {
       // Save profile data (in real app, would save to backend)
