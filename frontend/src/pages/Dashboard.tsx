@@ -257,7 +257,7 @@ const Dashboard: React.FC = () => {
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
-              className="card hover:shadow-lg transition-all duration-300 cursor-pointer"
+              className="card-enhanced hover:shadow-lg transition-all duration-300 cursor-pointer"
               whileHover={{ y: -2, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               initial={{ opacity: 0, y: 20 }}

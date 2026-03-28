@@ -7,7 +7,7 @@
 @layer base {
   body {
     font-family: 'Inter', system-ui, sans-serif;
-    background-color: #F0F8F0; /* Very light sage green - calming for autism */
+    background-color: #F8F6F0; /* Warm cream base */
     color: #1f2937;
   }
   
@@ -18,19 +18,20 @@
 
 @layer components {
   .card {
-    background-color: #FFFFFF; /* White */
-    border-radius: 1.5rem; /* More rounded */
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04); /* Softer shadow */
-    border: 1px solid #E8F4E8; /* Very light green border */
+    background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(232, 244, 232, 0.6);
     padding: 1.5rem;
+    backdrop-filter: blur(10px);
   }
   
   .btn-primary {
-    background: linear-gradient(135deg, #B8E6B8, #D4F1D4); /* Soft green gradient */
-    color: #2D5A2D; /* Dark green text */
+    background: linear-gradient(135deg, #E8B4B8, #F4D1AE); /* Soft pink to peach */
+    color: #8B4513;
     font-weight: 600;
     padding: 0.75rem 1.5rem;
-    border-radius: 1rem; /* More rounded */
+    border-radius: 1rem;
     transition: all 0.3s ease;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
     border: none;
@@ -38,41 +39,42 @@
   }
   
   .btn-primary:hover {
-    background: linear-gradient(135deg, #A5D6A5, #C1E8C1);
+    background: linear-gradient(135deg, #E1A5AA, #F0C49B);
     box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.12);
     transform: translateY(-1px);
   }
 
   .btn-secondary {
-    background: #FFFFFF; /* White */
-    color: #5A8A5A; /* Medium green */
+    background: rgba(255, 255, 255, 0.9);
+    color: #8B7355;
     font-weight: 500;
     padding: 0.75rem 1.5rem;
-    border-radius: 1rem; /* More rounded */
+    border-radius: 1rem;
     transition: all 0.3s ease;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04);
-    border: 2px solid #E8F4E8; /* Light green border */
+    border: 2px solid rgba(232, 244, 232, 0.6);
     cursor: pointer;
+    backdrop-filter: blur(10px);
   }
   
   .btn-secondary:hover {
-    background: #F8FDF8; /* Very light green */
-    border-color: #B8E6B8; /* Soft green */
+    background: rgba(248, 253, 248, 0.95);
+    border-color: #E8B4B8;
     box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.08);
     transform: translateY(-1px);
   }
 
   .progress-bar {
     width: 100%;
-    height: 0.75rem; /* Slightly thicker */
-    background-color: #E8F4E8; /* Light green */
-    border-radius: 0.5rem; /* More rounded */
+    height: 0.75rem;
+    background-color: rgba(232, 244, 232, 0.6);
+    border-radius: 0.5rem;
     overflow: hidden;
   }
 
   .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #B8E6B8, #D4F1D4); /* Soft green gradient */
+    background: linear-gradient(90deg, #E8B4B8, #F4D1AE);
     border-radius: 0.5rem;
     transition: width 0.8s ease-in-out;
   }
@@ -81,61 +83,37 @@
     font-family: 'Poppins', system-ui, sans-serif;
   }
 
-  /* Custom gradient backgrounds - autism-friendly colors */
+  /* Custom gradient backgrounds with the provided pattern */
   .bg-warm-gradient {
-    background: linear-gradient(135deg, #F0F8F0 0%, #E8F4E8 50%, #D4F1D4 100%);
+    background-color: #F8F6F0;
+    background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3C!-- Elephant --%3E%3Cg id='elephant'%3E%3Cellipse cx='15' cy='12' rx='8' ry='6' fill='%23B8C5B8' opacity='0.6'/%3E%3Cellipse cx='12' cy='8' rx='4' ry='3' fill='%23B8C5B8' opacity='0.6'/%3E%3Cpath d='M8 12 Q6 14 8 16' stroke='%23B8C5B8' stroke-width='1.5' fill='none' opacity='0.6'/%3E%3C/g%3E%3C!-- Rainbow --%3E%3Cg id='rainbow'%3E%3Cpath d='M5 15 Q15 5 25 15' stroke='%23E8B4B8' stroke-width='2' fill='none' opacity='0.5'/%3E%3Cpath d='M7 15 Q15 7 23 15' stroke='%23F4D1AE' stroke-width='2' fill='none' opacity='0.5'/%3E%3Cpath d='M9 15 Q15 9 21 15' stroke='%23D4E8D4' stroke-width='2' fill='none' opacity='0.5'/%3E%3C/g%3E%3C!-- Cloud --%3E%3Cg id='cloud'%3E%3Cellipse cx='15' cy='10' rx='6' ry='3' fill='%23E8E8E8' opacity='0.4'/%3E%3Ccircle cx='12' cy='8' r='3' fill='%23E8E8E8' opacity='0.4'/%3E%3Ccircle cx='18' cy='8' r='2.5' fill='%23E8E8E8' opacity='0.4'/%3E%3C/g%3E%3C!-- Star --%3E%3Cg id='star'%3E%3Cpath d='M10 2 L12 8 L18 8 L13 12 L15 18 L10 14 L5 18 L7 12 L2 8 L8 8 Z' fill='%23F4D1AE' opacity='0.4'/%3E%3C/g%3E%3C!-- Bunny --%3E%3Cg id='bunny'%3E%3Cellipse cx='10' cy='15' rx='3' ry='4' fill='%23E8B4B8' opacity='0.4'/%3E%3Cellipse cx='8' cy='8' rx='1' ry='3' fill='%23E8B4B8' opacity='0.4'/%3E%3Cellipse cx='12' cy='8' rx='1' ry='3' fill='%23E8B4B8' opacity='0.4'/%3E%3Ccircle cx='10' cy='12' r='2' fill='%23E8B4B8' opacity='0.4'/%3E%3C/g%3E%3C!-- Heart --%3E%3Cg id='heart'%3E%3Cpath d='M10 6 C8 4 5 4 5 7 C5 10 10 14 10 14 C10 14 15 10 15 7 C15 4 12 4 10 6 Z' fill='%23E8B4B8' opacity='0.3'/%3E%3C/g%3E%3C/defs%3E%3C!-- Pattern Layout --%3E%3Cuse href='%23rainbow' x='0' y='0'/%3E%3Cuse href='%23cloud' x='40' y='10'/%3E%3Cuse href='%23star' x='80' y='5'/%3E%3Cuse href='%23elephant' x='120' y='15'/%3E%3Cuse href='%23bunny' x='160' y='20'/%3E%3Cuse href='%23heart' x='20' y='40'/%3E%3Cuse href='%23cloud' x='60' y='45'/%3E%3Cuse href='%23rainbow' x='100' y='35'/%3E%3Cuse href='%23star' x='140' y='50'/%3E%3Cuse href='%23elephant' x='0' y='80'/%3E%3Cuse href='%23bunny' x='40' y='75'/%3E%3Cuse href='%23heart' x='80' y='85'/%3E%3Cuse href='%23cloud' x='120' y='90'/%3E%3Cuse href='%23rainbow' x='160' y='80'/%3E%3Cuse href='%23star' x='20' y='120'/%3E%3Cuse href='%23elephant' x='60' y='115'/%3E%3Cuse href='%23bunny' x='100' y='125'/%3E%3Cuse href='%23heart' x='140' y='110'/%3E%3Cuse href='%23cloud' x='0' y='160'/%3E%3Cuse href='%23rainbow' x='40' y='155'/%3E%3Cuse href='%23star' x='80' y='165'/%3E%3Cuse href='%23elephant' x='120' y='170'/%3E%3Cuse href='%23bunny' x='160' y='160'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    background-repeat: repeat;
     position: relative;
   }
 
-  .bg-warm-gradient::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-      /* Subtle elephant silhouettes */
-      radial-gradient(circle at 20% 30%, rgba(180, 230, 180, 0.1) 2px, transparent 2px),
-      radial-gradient(circle at 80% 70%, rgba(180, 230, 180, 0.1) 1.5px, transparent 1.5px),
-      radial-gradient(circle at 60% 20%, rgba(180, 230, 180, 0.08) 2.5px, transparent 2.5px),
-      /* Soft cloud shapes */
-      radial-gradient(ellipse at 40% 80%, rgba(200, 240, 200, 0.12) 15px, transparent 15px),
-      radial-gradient(ellipse at 90% 40%, rgba(200, 240, 200, 0.1) 12px, transparent 12px),
-      /* Gentle rainbow arcs */
-      conic-gradient(from 45deg at 10% 90%, transparent 0deg, rgba(180, 230, 180, 0.05) 30deg, transparent 60deg),
-      conic-gradient(from 135deg at 95% 10%, transparent 0deg, rgba(180, 230, 180, 0.05) 30deg, transparent 60deg);
-    background-size: 
-      150px 150px,
-      120px 120px,
-      180px 180px,
-      80px 40px,
-      60px 30px,
-      200px 200px,
-      200px 200px;
-    background-repeat: repeat;
-    pointer-events: none;
-    opacity: 0.6;
-  }
-
   .bg-soft-gradient {
-    background: linear-gradient(135deg, #FFFFFF 0%, #F8FDF8 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 253, 248, 0.9) 100%);
   }
 
-  /* Autism-friendly color palette */
-  .text-autism-primary { color: #2D5A2D; }
-  .text-autism-secondary { color: #5A8A5A; }
-  .text-autism-accent { color: #7BA05B; }
-  .bg-autism-light { background-color: #F0F8F0; }
-  .bg-autism-soft { background-color: #E8F4E8; }
-  .border-autism-light { border-color: #E8F4E8; }
+  /* Autism-friendly color palette matching the pattern */
+  .text-autism-primary { color: #8B7355; }
+  .text-autism-secondary { color: #B8C5B8; }
+  .text-autism-accent { color: #E8B4B8; }
+  .bg-autism-light { background-color: rgba(248, 246, 240, 0.9); }
+  .bg-autism-soft { background-color: rgba(232, 244, 232, 0.6); }
+  .border-autism-light { border-color: rgba(232, 244, 232, 0.6); }
+  
+  /* Enhanced card styling for better visibility over pattern */
+  .card-enhanced {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(232, 180, 184, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
   
   /* Reduced motion for accessibility */
   @media (prefers-reduced-motion: reduce) {
-    .bg-warm-gradient::before {
-      animation: none;
-    }
-    
     * {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;

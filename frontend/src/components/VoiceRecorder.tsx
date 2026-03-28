@@ -226,7 +226,7 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   };
 
   return (
-    <div className="card text-center">
+    <div className="card-enhanced text-center">
       <h3 className="font-display font-semibold text-lg mb-6 text-gray-800">
         Voice Recording & Analysis
       </h3>

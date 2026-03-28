@@ -63,7 +63,7 @@ const ProgressAnalytics: React.FC<ProgressAnalyticsProps> = ({
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className="bg-white rounded-2xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-white/95 backdrop-blur-md rounded-2xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-pink-200/30"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
@@ -89,7 +89,7 @@ const ProgressAnalytics: React.FC<ProgressAnalyticsProps> = ({
             {/* Summary Stats */}
             <div className="grid md:grid-cols-3 gap-4 mb-8">
               <motion.div 
-                className="card text-center"
+                className="card-enhanced text-center"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
@@ -103,7 +103,7 @@ const ProgressAnalytics: React.FC<ProgressAnalyticsProps> = ({
               </motion.div>
 
               <motion.div 
-                className="card text-center"
+                className="card-enhanced text-center"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
@@ -117,7 +117,7 @@ const ProgressAnalytics: React.FC<ProgressAnalyticsProps> = ({
               </motion.div>
 
               <motion.div 
-                className="card text-center"
+                className="card-enhanced text-center"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
@@ -135,7 +135,7 @@ const ProgressAnalytics: React.FC<ProgressAnalyticsProps> = ({
 
             {/* Accuracy Trend Chart */}
             <motion.div 
-              className="card mb-6"
+              className="card-enhanced mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
@@ -180,7 +180,7 @@ const ProgressAnalytics: React.FC<ProgressAnalyticsProps> = ({
 
             {/* Phoneme Performance */}
             <motion.div 
-              className="card mb-6"
+              className="card-enhanced mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
@@ -228,7 +228,7 @@ const ProgressAnalytics: React.FC<ProgressAnalyticsProps> = ({
 
             {/* Performance Insights */}
             <motion.div 
-              className="card"
+              className="card-enhanced"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}

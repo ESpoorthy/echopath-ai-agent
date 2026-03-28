@@ -26,7 +26,7 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onSelect }) => {
 
   return (
     <motion.div
-      className="card hover:shadow-lg transition-all duration-300 cursor-pointer group"
+      className="card-enhanced hover:shadow-lg transition-all duration-300 cursor-pointer group"
       onClick={() => onSelect(child)}
       whileHover={{ scale: 1.02, y: -2 }}
       whileTap={{ scale: 0.98 }}

@@ -62,7 +62,7 @@ const Layout: React.FC<LayoutProps> = ({ children, showNavigation = true }) => {
       </div>
 
       {showNavigation && (
-        <nav className="relative z-10 bg-white/80 backdrop-blur-sm border-b border-cream-200">
+        <nav className="relative z-10 bg-white/85 backdrop-blur-md border-b border-pink-200/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <motion.div 
@@ -74,7 +74,7 @@ const Layout: React.FC<LayoutProps> = ({ children, showNavigation = true }) => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 bg-gradient-to-br from-pink-300 to-orange-300 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-sm">E</span>
                 </div>
                 <span className="font-display font-semibold text-xl text-gray-800">EchoPath</span>
