@@ -6,9 +6,22 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Exact colors from requirements
+        beige: {
+          50: '#fefcf9',
+          100: '#fdf7f0', 
+          200: '#faeee1',
+          300: '#f6e2cc',
+          400: '#F5F5DC', // Main beige
+          500: '#e8be8f',
+          600: '#dda66e',
+          700: '#cd8d52',
+          800: '#b87543',
+          900: '#9a6139',
+        },
         cream: {
           50: '#fefdfb',
-          100: '#fdf9f3',
+          100: '#FFFDD0', // Main cream
           200: '#faf2e7',
           300: '#f6e8d7',
           400: '#f0d9c4',
@@ -18,17 +31,41 @@ module.exports = {
           800: '#b8834f',
           900: '#9a6d3f',
         },
-        beige: {
-          50: '#fefcf9',
-          100: '#fdf7f0',
-          200: '#faeee1',
-          300: '#f6e2cc',
-          400: '#f0d2b0',
-          500: '#e8be8f',
-          600: '#dda66e',
-          700: '#cd8d52',
-          800: '#b87543',
-          900: '#9a6139',
+        brown: {
+          50: '#faf8f5',
+          100: '#f5f1ea',
+          200: '#ebe2d4',
+          300: '#D2B48C', // Light brown
+          400: '#c4a373',
+          500: '#b8935a',
+          600: '#a67c47',
+          700: '#8a653b',
+          800: '#715233',
+          900: '#5d442c',
+        },
+        yellow: {
+          50: '#fefce8',
+          100: '#FFF3B0', // Soft yellow
+          200: '#fef08a',
+          300: '#fde047',
+          400: '#facc15',
+          500: '#eab308',
+          600: '#ca8a04',
+          700: '#a16207',
+          800: '#854d0e',
+          900: '#713f12',
+        },
+        orange: {
+          50: '#fff7ed',
+          100: '#FFD8A8', // Light orange
+          200: '#fed7aa',
+          300: '#fdba74',
+          400: '#fb923c',
+          500: '#f97316',
+          600: '#ea580c',
+          700: '#c2410c',
+          800: '#9a3412',
+          900: '#7c2d12',
         },
         sage: {
           50: '#f6f7f6',

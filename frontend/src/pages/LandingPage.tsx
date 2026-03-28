@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import Layout from '../components/Layout';
+import Layout from '../components/Layout.tsx';
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
@@ -68,7 +68,7 @@ const LandingPage: React.FC = () => {
             >
               <motion.button
                 className="btn-primary text-lg px-8 py-4 shadow-lg"
-                onClick={() => navigate('/dashboard')}
+                onClick={() => navigate('/profile')}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -76,11 +76,11 @@ const LandingPage: React.FC = () => {
               </motion.button>
               <motion.button
                 className="btn-secondary text-lg px-8 py-4"
-                onClick={() => navigate('/demo')}
+                onClick={() => navigate('/session/1')}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Watch Demo
+                Try Voice Demo
               </motion.button>
             </motion.div>
 

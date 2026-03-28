@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { AIAgent } from '../types';
+import { AIAgent } from '../types/index.ts';
 
 interface AIAgentPanelProps {
   agents: AIAgent[];

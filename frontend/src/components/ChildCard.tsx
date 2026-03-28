@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ChildProfile } from '../types';
+import { ChildProfile } from '../types/index.ts';
 
 interface ChildCardProps {
   child: ChildProfile;
@@ -8,13 +8,20 @@ interface ChildCardProps {
 }
 
 const ChildCard: React.FC<ChildCardProps> = ({ child, onSelect }) => {
-  const getDifficultyColor = (level: string) => {
-    switch (level) {
-      case 'beginner': return 'bg-green-100 text-green-700';
-      case 'intermediate': return 'bg-yellow-100 text-yellow-700';
-      case 'advanced': return 'bg-orange-100 text-orange-700';
-      default: return 'bg-gray-100 text-gray-700';
-    }
+  const getAccuracyColor = (accuracy: number) => {
+    if (accuracy >= 90) return 'from-green-600 to-green-700 text-white'; // Dark green
+    if (accuracy >= 80) return 'from-green-500 to-green-600 text-white'; // Medium-dark green
+    if (accuracy >= 70) return 'from-green-400 to-green-500 text-white'; // Medium green
+    if (accuracy >= 60) return 'from-green-300 to-green-400 text-gray-800'; // Light-medium green
+    return 'from-green-200 to-green-300 text-gray-800'; // Light green
+  };
+
+  const getAccuracyProgressColor = (accuracy: number) => {
+    if (accuracy >= 90) return 'from-green-600 to-green-700'; // Dark green
+    if (accuracy >= 80) return 'from-green-500 to-green-600'; // Medium-dark green
+    if (accuracy >= 70) return 'from-green-400 to-green-500'; // Medium green
+    if (accuracy >= 60) return 'from-green-300 to-green-400'; // Light-medium green
+    return 'from-green-200 to-green-300'; // Light green
   };
 
   return (
@@ -37,7 +44,11 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onSelect }) => {
             <p className="text-sm text-gray-600">{child.age} years old</p>
           </div>
         </div>
-        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getDifficultyColor(child.difficultyLevel)}`}>
+        <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+          child.difficultyLevel === 'beginner' ? 'bg-green-100 text-green-700' :
+          child.difficultyLevel === 'intermediate' ? 'bg-yellow-100 text-yellow-700' :
+          'bg-orange-100 text-orange-700'
+        }`}>
           {child.difficultyLevel}
         </span>
       </div>
@@ -53,12 +64,16 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onSelect }) => {
 
         <div className="flex justify-between items-center">
           <span className="text-sm text-gray-600">Average Accuracy</span>
-          <span className="font-semibold text-beige-600">{child.averageAccuracy}%</span>
+          <div className="flex items-center space-x-2">
+            <div className={`px-3 py-1 rounded-full text-sm font-bold bg-gradient-to-r ${getAccuracyColor(child.averageAccuracy)}`}>
+              {child.averageAccuracy}%
+            </div>
+          </div>
         </div>
 
         <div className="progress-bar">
           <motion.div 
-            className="progress-fill"
+            className={`h-full rounded-full bg-gradient-to-r ${getAccuracyProgressColor(child.averageAccuracy)}`}
             initial={{ width: 0 }}
             animate={{ width: `${child.averageAccuracy}%` }}
             transition={{ duration: 1, delay: 0.2 }}

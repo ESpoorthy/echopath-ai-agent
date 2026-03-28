@@ -70,5 +70,5 @@ export interface RewardBadge {
   icon: string;
   earned: boolean;
   earnedDate?: string;
-  category: 'accuracy' | 'consistency' | 'improvement' | 'milestone';
+  category: 'accuracy' | 'consistency' | 'improvement' | 'milestone' | 'special';
 }

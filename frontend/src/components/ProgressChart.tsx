@@ -1,7 +1,7 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import { motion } from 'framer-motion';
-import { ProgressData } from '../types';
+import { ProgressData } from '../types/index.ts';
 
 interface ProgressChartProps {
   data: ProgressData[];
