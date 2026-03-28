@@ -139,11 +139,11 @@ const Layout: React.FC<LayoutProps> = ({ children, showNavigation = true }) => {
             transition={{ duration: 0.6 }}
             className="space-y-2"
           >
-            <p className="text-gray-700 font-medium">
-              Built with ❤️ for children, families, and speech-language pathologists worldwide.
-            </p>
             <p className="text-gray-600 text-sm">
               EchoPath AI - Where technology meets compassionate care.
+            </p>
+            <p className="text-gray-700 font-medium">
+              Built with ❤️ for children, families, and speech-language pathologists worldwide.
             </p>
           </motion.div>
         </div>
