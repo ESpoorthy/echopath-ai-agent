@@ -519,12 +519,39 @@ const TherapySession: React.FC = () => {
               <AIAgentPanel agents={mockAIAgents} />
             </motion.div>
 
-            {/* Session Progress - Moved here for better flow */}
+            {/* Feedback Panel */}
+            <AnimatePresence>
+              {showFeedback && attempts.length > 0 && (
+                <FeedbackCard
+                  score={attempts[attempts.length - 1].accuracy}
+                  transcription={attempts[attempts.length - 1].transcription}
+                  targetSound={currentExercise.targetSound}
+                  feedback={attempts[attempts.length - 1].feedback}
+                  confidence={attempts[attempts.length - 1].confidence}
+                  onTryAgain={() => setShowFeedback(false)}
+                  onNextExercise={generateNextExercise}
+                  showAIExplanation={showAIExplanation}
+                />
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Sidebar */}
+          <div className="space-y-6">
+            {/* Adaptive Intelligence Panel */}
+            <AdaptivePanel
+              currentDifficulty={difficultyLevel}
+              recentPerformance={recentPerformance}
+              nextExerciseReason={getNextExerciseReason()}
+              aiDecisions={getAIDecisions()}
+            />
+
+            {/* Session Progress */}
             <motion.div
               className="card"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
             >
               <h3 className="font-display font-semibold text-lg mb-4 text-gray-800">
                 Session Progress
@@ -581,33 +608,6 @@ const TherapySession: React.FC = () => {
                 </motion.button>
               )}
             </motion.div>
-
-            {/* Feedback Panel */}
-            <AnimatePresence>
-              {showFeedback && attempts.length > 0 && (
-                <FeedbackCard
-                  score={attempts[attempts.length - 1].accuracy}
-                  transcription={attempts[attempts.length - 1].transcription}
-                  targetSound={currentExercise.targetSound}
-                  feedback={attempts[attempts.length - 1].feedback}
-                  confidence={attempts[attempts.length - 1].confidence}
-                  onTryAgain={() => setShowFeedback(false)}
-                  onNextExercise={generateNextExercise}
-                  showAIExplanation={showAIExplanation}
-                />
-              )}
-            </AnimatePresence>
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Adaptive Intelligence Panel */}
-            <AdaptivePanel
-              currentDifficulty={difficultyLevel}
-              recentPerformance={recentPerformance}
-              nextExerciseReason={getNextExerciseReason()}
-              aiDecisions={getAIDecisions()}
-            />
           </div>
         </div>
 
