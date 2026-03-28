@@ -76,7 +76,7 @@ EchoPath's interface embodies **calm professionalism** - sophisticated enough fo
 
 ```bash
 # Clone repository
-git clone https://github.com/your-org/echopath-ai-agent.git
+git clone https://github.com/ESpoorthy/echopath-ai-agent.git
 cd echopath-ai-agent
 
 # Setup environment
@@ -92,6 +92,13 @@ cd frontend && npm install && npm start
 cd ../backend && uvicorn main:app --reload
 ```
 
+## 🌐 **Access Points**
+
+- **Frontend Application**: http://localhost:3000
+- **Backend API**: http://localhost:8000  
+- **API Documentation**: http://localhost:8000/docs
+- **Health Check**: http://localhost:8000/api/health
+
 ## 🏆 Awards & Recognition
 
 - **Best AI Innovation** - TechCrunch Disrupt 2024
@@ -101,7 +108,20 @@ cd ../backend && uvicorn main:app --reload
 
 ## 🤝 Contributing
 
-We welcome contributions from developers, clinicians, and accessibility experts. See our [Contributing Guidelines](CONTRIBUTING.md) for details.
+We welcome contributions from developers, clinicians, and accessibility experts:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 🌟 **Support & Community**
+
+- 📧 **Email**: support@echopath.ai
+- 🐛 **Issues**: [GitHub Issues](https://github.com/ESpoorthy/echopath-ai-agent/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/ESpoorthy/echopath-ai-agent/discussions)
+- 📖 **Documentation**: Available in `/docs` folder
 
 ## 📄 License
 
