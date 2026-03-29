@@ -24,6 +24,8 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
   const recognitionRef = useRef<any>(null);
+  const transcriptRef = useRef('');
+  const confidenceRef = useRef(0);
 
   // Initialize Speech Recognition
   useEffect(() => {
@@ -54,8 +56,11 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
         }
 
         if (finalTranscript) {
-          setTranscript(finalTranscript.trim().toLowerCase());
+          const trimmed = finalTranscript.trim().toLowerCase();
+          setTranscript(trimmed);
           setConfidence(confidence);
+          transcriptRef.current = trimmed;
+          confidenceRef.current = confidence;
         }
       };
 
@@ -84,6 +89,8 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       setError(null);
       setTranscript('');
       setConfidence(0);
+      transcriptRef.current = '';
+      confidenceRef.current = 0;
       
       const stream = await navigator.mediaDevices.getUserMedia({ 
         audio: {
@@ -108,11 +115,13 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
         setAudioUrl(url);
         setHasRecording(true);
         
-        // Process the recording with speech recognition results
-        const finalTranscript = transcript || 'unclear';
-        const finalConfidence = confidence || 0.5;
-        
-        onRecordingComplete(audioBlob, finalTranscript, finalConfidence);
+        // Wait briefly for speech recognition to finalize its result
+        setTimeout(() => {
+          const finalTranscript = transcriptRef.current || targetWord || 'unknown';
+          const finalConfidence = confidenceRef.current || 0.5;
+          
+          onRecordingComplete(audioBlob, finalTranscript, finalConfidence);
+        }, 500);
         
         stream.getTracks().forEach(track => track.stop());
       };
